@@ -9,10 +9,10 @@ LIBRD_KAFKA_VERSIONS = [
     "1.0.0"
 ]
 
-subdirs("os").each do |distro| 
+subdirs("base").each do |distro| 
     LIBRD_KAFKA_VERSIONS.each do |version|
         tag = "brendanjryan/librdkafka:#{version}-#{distro}"
-        system "docker build . -f #{distro}/Dockerfile --build-arg LIBRDKAFKA_VERSION=v#{version} -t #{tag}"
+        system "docker build . -f base/#{distro}/Dockerfile --build-arg LIBRDKAFKA_VERSION=v#{version} -t #{tag}"
         system "docker push #{tag}"
     end
 end
